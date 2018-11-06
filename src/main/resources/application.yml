@@ -1,0 +1,52 @@
+server:
+  port: 8081
+spring:
+  profiles: dev
+  messages:
+    basename: i18n/login
+  thymeleaf:
+    cache: false #禁用模板缓存
+  datasource:
+    url: jdbc:mysql://192.168.200.100:23306/jdbctest
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    ###数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    ### 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  ### 映射mapper.xml文件
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+### 自定义starter
+custom:
+  starter:
+    hello:
+      speaker: WALL-E
+      listener: EVE
+---
+server:
+  port: 8082
+spring:
+  profiles: pro
+#访问根路径，默认情况下IntelliJ IDEA是没有访问根路径的，如localhost:8080/请求路径
+
+#people:
+#  name: shibo
