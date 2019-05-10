@@ -29,6 +29,16 @@ public class MyServerConfig {
         FilterRegistrationBean filterRegistrationBean =new  FilterRegistrationBean();
         filterRegistrationBean.setFilter(new MyFilter());
         filterRegistrationBean.setUrlPatterns(Arrays.asList("/myServlet","/hello"));
+        filterRegistrationBean.setOrder(1);//order的数值越小 则优先级越高
+        return filterRegistrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean myFilter2() {
+        FilterRegistrationBean filterRegistrationBean =new  FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new MyFilter());
+        filterRegistrationBean.setUrlPatterns(Arrays.asList("/myServlet","/hello"));
+        filterRegistrationBean.setOrder(2);//order的数值越小 则优先级越高
         return filterRegistrationBean;
     }
 
